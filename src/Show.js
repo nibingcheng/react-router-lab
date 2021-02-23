@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Show extends Component {
 
@@ -11,29 +12,31 @@ class Show extends Component {
         
       if (parkData !== undefined) { 
             this.parkImages = parkData.images.map((value,index) => 
-            <img key={index} src={value.url} />            
+            <img className="showPageImages" key={index} src={value.url } alt={value.altText}/>            
             )
       };  
       return (
-          <div>         
-            <h1>this is show page!</h1>
+          <div className="showPageContainer">         
             
             {parkData ?  
                 <div>
+                    <div>
+                        <img className="showPageLgImg" src={parkData.images[0].url} alt={parkData.images[0].altText}/>
+                    </div>
+                    <div className="parkNameDescription">
                     <h3>{parkData.name}</h3>
                     <p>{parkData.description}</p>
+                    </div>
                     <h3>Address</h3>
                     <div>{parkData.addresses[0].line1}</div>
                     <div>
                         {parkData.addresses[0].city}, {parkData.addresses[0].stateCode} {parkData.addresses[0].postalCode}
                     </div>
                     
+                    <p>Images</p>
                     <div>
-                        <img src={parkData.images[0].url} />
+                        {this.parkImages}
                     </div>
-                    
-                    {this.parkImages}
-                    
                     <h3>Directions</h3>
                     <div>{parkData.directionsInfo}</div>
                     <div id="read-more">
@@ -41,10 +44,7 @@ class Show extends Component {
                         Read More
                         </a>
                     </div>
-                    <div>
-                        <p>National Park Service</p>
-                        <p>U.S. Department of the Interior</p>
-                    </div>
+                    <Link to={`/`}><p className="back2ParkList">Back to Park List</p></Link>
                 </div>
             : null
             }

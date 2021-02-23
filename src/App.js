@@ -23,7 +23,7 @@ class App extends Component {
         Accept: 'application/json'
       }
     }).then(response => {
-        console.log("App:", response.data);
+        // console.log("App:", response.data);
        
         this.setState ({
          parks: response.data.data
@@ -38,19 +38,28 @@ class App extends Component {
     // console.log(this.state);
     return (
         <div>
-          <Link to='/'>
-            <h1>National Parks</h1>
-          </Link>
-          <Switch>
-            <Route exact path='/' render={(routerProps)=>
-            <Homepage parks={this.state.parks} {...routerProps}/>
-            }>    
-            </Route>
-            <Route path='/park/:id' render={(routerProps)=>
-            <Show parks={this.state.parks} {...routerProps}/>
-            }>    
-            </Route>
-          </Switch>
+            <nav className="topBanner">
+              <Link to='/'>
+                <h1>National Parks List</h1>
+              </Link>
+            </nav>
+    
+            <Switch>
+              <Route exact path='/' render={(routerProps)=>
+              <Homepage parks={this.state.parks} {...routerProps}/>
+              }>    
+              </Route>
+              <Route path='/park/:id' render={(routerProps)=>
+              <Show parks={this.state.parks} {...routerProps}/>
+              }>    
+              </Route>
+            </Switch>
+
+            <div className="footer">
+                <p className="footerText">National Park Service</p>
+                <p>U.S. Department of the Interior</p>
+            </div>
+            
         </div>
     );
   }
